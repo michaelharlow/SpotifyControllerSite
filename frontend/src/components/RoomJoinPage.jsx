@@ -1,13 +1,37 @@
 import React, { useState } from "react";
 import { TextField, Button, Grid, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function RoomJoinPage() {
+  let navigate = useNavigate();
+
   const [roomCode, setRoomCode] = useState("");
   const [error, setError] = useState("");
 
   const handleTextChange = (event) => {
     setRoomCode(event.target.value);
+  };
+
+  const handleJoinButtonPressed = () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        code: roomCode,
+      }),
+    };
+    fetch("/api/join-room", requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          navigate(`/room/${roomCode}`);
+        } else {
+          setError("Room not found");
+          setRoomCode("");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -29,7 +53,11 @@ export default function RoomJoinPage() {
         />
       </Grid>
       <Grid item xs={12}>
-        <Button variant="contained" color="primary" onClick>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleJoinButtonPressed}
+        >
           Join Room
         </Button>
       </Grid>
