@@ -30,6 +30,11 @@ const Home = () => {
 export default function HomePage() {
   const [roomCode, setRoomCode] = useState(null);
 
+  const clearRoomCode = () => {
+    setRoomCode(null);
+    console.log("room code cleared");
+  };
+
   useEffect(() => {
     fetch("/api/user-in-room")
       .then((response) => response.json())
@@ -48,7 +53,10 @@ export default function HomePage() {
         />
         <Route path="/join" element={<RoomJoinPage />} />
         <Route path="/create" element={<CreateRoomPage />} />
-        <Route path="/room/:roomCode" element={<Room />} />
+        <Route
+          path="/room/:roomCode"
+          element={<Room exitCallback={clearRoomCode} />}
+        />
       </Routes>
     </BrowserRouter>
   );
