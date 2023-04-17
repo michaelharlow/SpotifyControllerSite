@@ -27,7 +27,7 @@ export default function Room(props) {
         setGuestCanPause(data.guest_can_pause);
         setIsHost(data.is_host);
       });
-  }, []);
+  });
 
   const onLeaveButtonPress = () => {
     const requestOptions = {
@@ -64,7 +64,6 @@ export default function Room(props) {
             votesToSkip={votesToSkip}
             guestCanPause={guestCanPause}
             roomCode={roomCode}
-            updateCallBack={""}
           />
         </Grid>
         <Grid item xs={12}>
