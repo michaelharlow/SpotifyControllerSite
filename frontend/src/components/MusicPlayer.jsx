@@ -15,7 +15,7 @@ import PauseIcon from "@mui/icons-material/Pause";
 function MusicPlayer(props) {
   console.log(props);
 
-  //let songProgress = (props.time / props.duration) * 100;
+  let songProgress = (props.time / props.duration) * 100;
 
   return (
     <Card>
@@ -25,10 +25,10 @@ function MusicPlayer(props) {
         </Grid>
         <Grid item xs={8}>
           <Typography component="h5" variant="h5">
-            Title
+            {props.title}
           </Typography>
           <Typography color="textSecondary" variant="subtitle1">
-            Artist
+            {props.artist}
           </Typography>
           <IconButton>
             <SkipNextIcon />
@@ -41,7 +41,7 @@ function MusicPlayer(props) {
           </IconButton>
         </Grid>
       </Grid>
-      <LinearProgress variant="determinate" value={50} />
+      <LinearProgress variant="determinate" value={songProgress} />
     </Card>
   );
 }

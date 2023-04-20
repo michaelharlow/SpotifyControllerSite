@@ -71,6 +71,9 @@ export default function Room(props) {
       .then((data) => {
         setSong(data);
         console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
